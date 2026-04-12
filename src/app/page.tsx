@@ -1,6 +1,6 @@
 export default function LandingPage() {
   // 🔴 IMPORTANT: Replace this URL with your actual Stripe Payment Link
-  const stripePaymentLink = "https://buy.stripe.com/YOUR_STRIPE_LINK_HERE";
+  const stripePaymentLink = "#";
 
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif', maxWidth: '800px', margin: '100px auto', textAlign: 'center', padding: '20px' }}>
