@@ -14,7 +14,7 @@ function OnboardingContent() {
   const [status, setStatus] = useState('');
 
   // 🔴 IMPORTANT: Replace YOUR_HUBSPOT_CLIENT_ID with your actual Client ID
-  const hubspotAuthUrl = `https://app.hubspot.com/oauth/authorize?client_id=f7b38951-a15c-45dd-a0a0-bbfc7133d879&redirect_uri=https://www.auspex.me/api/oauth/callback&scope=conversations.read%20conversations.write%20conversations.custom_channels.write%20crm.objects.contacts.read%20crm.objects.contacts.write&state=${sessionId}`;
+  const hubspotAuthUrl = `https://app-na2.hubspot.com/oauth/authorize?client_id=f7b38951-a15c-45dd-a0a0-bbfc7133d879&redirect_uri=https%3A%2F%2Fwww.auspex.me%2Fapi%2Foauth%2Fcallback&scope=crm.objects.contacts.write+oauth+conversations.read+conversations.write+conversations.custom_channels.write+crm.objects.contacts.read&state=${sessionId}`;
 
 // We added the specific React type to the 'e' parameter
   const handleSaveKeys = async (e: React.FormEvent<HTMLFormElement>) => {
