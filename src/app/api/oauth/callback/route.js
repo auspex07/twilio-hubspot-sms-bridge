@@ -1,3 +1,6 @@
+Here is the complete, updated **`src/app/api/oauth/callback/route.js`** file ready to copy and paste. It includes the Stripe subscription status fetch and the database upsert fix.
+
+```javascript
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import Stripe from 'stripe';
@@ -34,9 +37,17 @@ export async function GET(request) {
     
     // 3. Save to Supabase (Strict Enforcement)
     let stripeCustomerId = null;
+    let subStatus = null; 
+
     if (sessionId) {
         const session = await stripe.checkout.sessions.retrieve(sessionId);
         stripeCustomerId = session.customer;
+        
+        // Fetch the actual subscription to get the status
+        if (session.subscription) {
+            const subscription = await stripe.subscriptions.retrieve(session.subscription);
+            subStatus = subscription.status;
+        }
     }
 
     if (!stripeCustomerId) {
@@ -46,6 +57,7 @@ export async function GET(request) {
 
     const { error } = await supabase.from('customers').upsert({
         stripe_customer_id: stripeCustomerId,
+        subscription_status: subStatus,
         portal_id: portalId,
         access_token: access_token,
         refresh_token: refresh_token,
@@ -60,3 +72,4 @@ export async function GET(request) {
     return NextResponse.json({ error: 'OAuth failed' }, { status: 500 });
   }
 }
+```
