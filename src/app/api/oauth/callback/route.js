@@ -1,6 +1,3 @@
-Here is the complete, updated **`src/app/api/oauth/callback/route.js`** file ready to copy and paste. It includes the Stripe subscription status fetch and the database upsert fix.
-
-```javascript
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import Stripe from 'stripe';
@@ -72,4 +69,3 @@ export async function GET(request) {
     return NextResponse.json({ error: 'OAuth failed' }, { status: 500 });
   }
 }
-```
