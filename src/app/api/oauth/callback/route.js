@@ -44,12 +44,13 @@ export async function GET(request) {
         return NextResponse.redirect(new URL('/?error=unauthorized', request.url));
     }
 
-    const { error } = await supabase.from('customers').update({
+    const { error } = await supabase.from('customers').upsert({
+        stripe_customer_id: stripeCustomerId,
         portal_id: portalId,
         access_token: access_token,
         refresh_token: refresh_token,
         expires_at: expiresAt
-    }).eq('stripe_customer_id', stripeCustomerId);
+    }, { onConflict: 'stripe_customer_id' });
 
     if (error) throw error;
 
