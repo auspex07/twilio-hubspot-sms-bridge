@@ -6,6 +6,16 @@ import { useSearchParams } from 'next/navigation';
 function OnboardingContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id') || ''; 
+  // 🔴 THE NEW BOUNCER
+  if (!sessionId) {
+    return (
+      <div style={{ maxWidth: '600px', margin: '100px auto', textAlign: 'center', fontFamily: 'system-ui' }}>
+        <h2>Access Denied</h2>
+        <p>You must start a subscription before connecting your infrastructure.</p>
+        <a href="/" style={{ color: '#FF7A59', fontWeight: 'bold' }}>Return to Home</a>
+      </div>
+    );
+  }
   
   const [portalId, setPortalId] = useState('');
   const [twilioSid, setTwilioSid] = useState('');
